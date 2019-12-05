@@ -48,4 +48,7 @@ function countUniqueValues(arr){
     return i + 1; // as arrays start at 0, but we want to return the count of unique values by counting from 1.
 }
 
+//Time Complexity - O(N)
+//Space Complexity - O(1)
+
 
