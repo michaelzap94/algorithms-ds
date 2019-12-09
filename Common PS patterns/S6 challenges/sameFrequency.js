@@ -37,6 +37,9 @@ function sameFrequency(f, s) {
     return true;
 }
 
+//Time: O(n)
+//Space: O(n) -> String ^ as n increases -> number of keys/indexes in objects and arrays increase
+
 console.log(sameFrequency(128, 281));
 console.log(sameFrequency(34, 14));
 console.log(sameFrequency(3589578, 5879385));
