@@ -26,6 +26,8 @@ function isSubsequenceMP(str1, str2) {
     return false;
 }
 
+//Time: O(n)
+
 console.log(isSubsequenceMP('hello', 'hello world')); // true
 console.log(isSubsequenceMP('sing', 'sting')); // true
 console.log(isSubsequenceMP('abc', 'abracadabra')); // true
