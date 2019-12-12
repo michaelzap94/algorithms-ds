@@ -34,7 +34,6 @@ function swapValues(arr, a,b){
     const temp = arr[a];
     arr[a] = arr[b];
     arr[b] = temp;
-    valuesSwappepLastIteration = true;
     //return arr;//NOT NEEDED AS WE'LL MODIFY THE ORIGINAL ARRAY.
 }
 //Time complexity: O(n^2);
