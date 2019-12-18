@@ -4,7 +4,6 @@
 // If the value in the first array is smaller than the value in the second array, push the value in the first array into our results and move on to the next value in the first array
 // If the value in the first array is larger than the value in the second array, push the value in the second array into our results and move on to the next value in the second array
 // Once we exhaust one array, push in all remaining values from the other array
-
 function merge(arr1, arr2){
     let results = [];
     let i = 0;
@@ -34,7 +33,6 @@ function merge(arr1, arr2){
     }
     return results;
 }
-
 //console.log(merge([1,10,50],[2,14,99,100])); //[ 1, 2, 10, 14, 50, 99, 100 ]
 
 //Algorithm:
@@ -43,12 +41,9 @@ function merge(arr1, arr2){
 // Once the array has been merged back together, return the merged (and sorted!) array
 function mergeSort(arr){
     if(arr.length <= 1) return arr;
-
     let middle = Math.ceil(arr.length / 2);
     let slicedArr1 = mergeSort(arr.slice(0, middle));
     let slicedArr2 = mergeSort(arr.slice(middle, arr.length));
     return merge(slicedArr1, slicedArr2);
 }
-
-console.log(mergeSort([8,1,2,7,4,5,6,3]));
-
+console.log(mergeSort([8,1,2,7,4,5,6,3]));//[ 1, 2, 3, 4, 5, 6, 7, 8 ]
