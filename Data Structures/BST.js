@@ -111,6 +111,67 @@ class BST{
         }
     }
 
+    // Create a variable to store the values of nodes visited
+    // Store the root of the BST in a variable called current
+    // Write a helper function which accepts a node
+    //  Push the value of the node to the variable that stores the values
+    //  If the node has a left property, call the helper function with the left property on the node
+    //  If the node has a right property, call the helper function with the right property on the node
+    // Invoke the helper function with the current variable
+    // Return the array of values
+    DFS_PreOrder(){// RECURSIVELY
+        const visited = [];
+        let current = this.root;
+        function helper(hNode){
+            visited.push(hNode.value);
+            if(hNode.left) helper(hNode.left);
+            if(hNode.right) helper(hNode.right);
+        }
+        helper(current);
+        return visited;        
+    }
+
+    // Create a variable to store the values of nodes visited
+    // Store the root of the BST in a variable called current
+    // Write a helper function which accepts a node
+    //  If the node has a left property, call the helper function with the left property on the node
+    //  If the node has a right property, call the helper function with the right property on the node
+    //  Push the value of the node to the variable that stores the values
+    // Invoke the helper function with the current variable
+    // Return the array of values
+    DFS_PostOrder(){// RECURSIVELY
+        const visited = [];
+        let current = this.root;
+        function helper(hNode){
+            if(hNode.left) helper(hNode.left);
+            if(hNode.right) helper(hNode.right);
+            visited.push(hNode.value);
+        }
+        helper(current);
+        return visited;        
+    }
+
+    // Create a variable to store the values of nodes visited
+    // Store the root of the BST in a variable called current
+    // Write a helper function which accepts a node
+    //  If the node has a left property, call the helper function with the left property on the node
+    //  Push the value of the node to the variable that stores the values
+    //  If the node has a right property, call the helper function with the right property on the node
+    // Invoke the helper function with the current variable
+    // Return the array of values
+    DFS_InOrder(){// RECURSIVELY
+        const visited = [];
+        let current = this.root;
+        function helper(hNode){
+            if(hNode.left) helper(hNode.left);
+            visited.push(hNode.value);
+            if(hNode.right) helper(hNode.right);
+        }
+        helper(current);
+        return visited;        
+    }
+    
+
     /* Given a binary tree. Print its nodes in level order 
        using array for implementing queue */
        size(){ 
@@ -123,3 +184,19 @@ class BST{
                return(size(node.left) + 1 + size(node.right)); 
        } 
 }
+
+var myBST = new BST();
+myBST.insert(10);
+myBST.insert(6);
+myBST.insert(15);
+myBST.insert(3);
+myBST.insert(8);
+myBST.insert(2);
+myBST.insert(4);
+myBST.insert(7);
+myBST.insert(20);
+
+
+console.log(myBST.DFS_PreOrder());//[ 10, 6, 3, 2, 4, 8, 7, 15, 20 ]
+console.log(myBST.DFS_PostOrder());//[ 2, 4, 3, 7, 8, 6, 20, 15, 10 ]
+console.log(myBST.DFS_InOrder());//[ 2, 3, 4, 6, 7, 8, 10, 15, 20 ]
