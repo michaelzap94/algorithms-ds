@@ -81,21 +81,7 @@ newMaxBH.insert(12);
 newMaxBH.insert(55);
 console.log(newMaxBH.values);// [ 55, 39, 41, 18, 27, 12, 33 ]
 
-console.log(newMaxBH.extractMax());
-console.log(newMaxBH.values);
-console.log(newMaxBH.extractMax());
-console.log(newMaxBH.values);
-console.log(newMaxBH.extractMax());
-console.log(newMaxBH.values);
-console.log(newMaxBH.extractMax());
-console.log(newMaxBH.values);
-console.log(newMaxBH.extractMax());
-console.log(newMaxBH.values);
-console.log(newMaxBH.extractMax());
-console.log(newMaxBH.values);
-console.log(newMaxBH.extractMax());
-console.log(newMaxBH.values);
-
+console.log(newMaxBH.extractMax()); // * 7 ==>
 // 55
 // [ 41, 39, 33, 18, 27, 12 ]
 // 41
