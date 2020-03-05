@@ -40,5 +40,16 @@ class Graph {
     }
     
 }
-
+var mGraph = new Graph();
+mGraph.addVertex('A');
+mGraph.addVertex('B');
+mGraph.addVertex('C');
+mGraph.addEdge('A','B');
+mGraph.addEdge('A','C');
+mGraph.addEdge('B','C');
+console.log(mGraph.adjacencyList); //{ A: [ 'B', 'C' ], B: [ 'A', 'C' ], C: [ 'A', 'B' ] }
+mGraph.removeEdge('B','C');
+console.log(mGraph.adjacencyList); //{ A: [ 'B', 'C' ], B: [ 'A' ], C: [ 'A' ] }
+mGraph.removeVertex('B');
+console.log(mGraph.adjacencyList); //{ A: [ 'C' ], C: [ 'A' ] }
 
