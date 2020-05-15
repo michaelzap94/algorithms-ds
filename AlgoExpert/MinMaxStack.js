@@ -18,18 +18,6 @@ class MinMaxStack {
       //just pop the latest pair of [min, max], this way the new latest will be the prev pair
       this.minMaxHistory.pop();
       return this.stack.pop();
-
-
-    //   if(this.stack.length === 0){
-    //     this.minIndex = null;
-    //     this.maxIndex = null;
-    //   } else {
-    //     if (popped === this.stack[maxIndex]) {
-    //         this.maxIndex = number;
-    //     } else if (popped === this.stack[minIndex]) {
-    //         this.minIndex = number;
-    //     }
-    //   }
   }
 
   push(number) {
@@ -49,19 +37,6 @@ class MinMaxStack {
         //4) add new min and max values to the history
         this.minMaxHistory.push([newMin, newMax]);
     }
-    // const newNumberIndex = this.stack.length;
-    // //the first time we add a number this.minIndex and this.maxIndex should be null
-    // if (this.stack.length === 0 && this.minIndex === null && this.maxIndex === null) {
-    //   this.minIndex = newNumberIndex;
-    //   this.maxIndex = newNumberIndex;
-    // } else {
-    //   //otherwise compare to see if this new number should be minIndex or maxIndex;
-    //   if (number > this.stack[maxIndex]) {
-    //     this.maxIndex = newNumberIndex;
-    //   } else if (number < this.stack[minIndex]) {
-    //     this.minIndex = newNumberIndex;
-    //   }
-    // }
   }
 
   getMin() {

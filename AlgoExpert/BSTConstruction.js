@@ -10,7 +10,7 @@ class BST {
   }
 
   insert(value) {
-    // Write your code here.
+    // INSERT WHEN WE REACH TO A LEAF
     // Do not edit the return statement of this method.
     let current = this;//this will be the root -> new BST(value)
     while(true){
@@ -43,7 +43,7 @@ class BST {
   }
 
   contains(value) {
-    // Write your code here.
+    // SINCE BST you can traverse moving left or right using the current.value and updating current
     let contains = false;
     let current = this;
     //current will be null if we reach to a leaf, which means we got to the end of the search
@@ -53,7 +53,7 @@ class BST {
         } else if(value > current.value) {
             current = current.right;
         } else {
-            // value == current.value
+            // if value == current.value
             contains = true;//return true
         }
     }
