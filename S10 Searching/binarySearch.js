@@ -11,12 +11,13 @@
 //Write a function called binarySearch which accepts a sorted array and a value and returns the index at which the value exists.Otherwise, return -1. 
 function binarySearch(arr, e){
     if(arr.length === 0) return -1;
-    //FIRST INIT the right, left and middle indexes. AND, compare in the while loop the elements next to the middle element.
+    //FIRST INIT the right, left AND, compare in the while loop the elements next to the middle element.
     let leftMostIndex = 0;
     let rigthMostIndex = arr.length - 1;
-    let middleIndex = Math.floor( (rigthMostIndex + leftMostIndex ) / 2 );
     // While the left pointer comes before the right pointer: left < rigth
     while(leftMostIndex <= rigthMostIndex) {
+        let middleIndex = Math.floor( (rigthMostIndex + leftMostIndex ) / 2 );
+
         if (arr[middleIndex] === e) {
             // e is the element in the middleIndex
             return middleIndex;
