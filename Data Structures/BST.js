@@ -81,7 +81,6 @@ class BST{
             return found;
         }
     }
-
     // Create a queue (this can be an array) and a variable to store the values of nodes visited
     // Place the root node in the queue
     // Loop as long as there is anything in the queue
@@ -110,7 +109,6 @@ class BST{
             return visited;
         }
     }
-
     // Create a variable to store the values of nodes visited
     // Store the root of the BST in a variable called current
     // Write a helper function which accepts a node
@@ -130,7 +128,6 @@ class BST{
         helper(current);
         return visited;        
     }
-
     // Create a variable to store the values of nodes visited
     // Store the root of the BST in a variable called current
     // Write a helper function which accepts a node
@@ -150,7 +147,6 @@ class BST{
         helper(current);
         return visited;        
     }
-
     // Create a variable to store the values of nodes visited
     // Store the root of the BST in a variable called current
     // Write a helper function which accepts a node
@@ -169,9 +165,7 @@ class BST{
         }
         helper(current);
         return visited;        
-    }
-    
-
+    }  
     /* Given a binary tree. Print its nodes in level order 
        using array for implementing queue */
        size(){ 
@@ -184,7 +178,6 @@ class BST{
                return(size(node.left) + 1 + size(node.right)); 
        } 
 }
-
 var myBST = new BST();
 myBST.insert(10);
 myBST.insert(6);
@@ -195,8 +188,6 @@ myBST.insert(2);
 myBST.insert(4);
 myBST.insert(7);
 myBST.insert(20);
-
-
 console.log(myBST.DFS_PreOrder());//[ 10, 6, 3, 2, 4, 8, 7, 15, 20 ]
 console.log(myBST.DFS_PostOrder());//[ 2, 4, 3, 7, 8, 6, 20, 15, 10 ]
 console.log(myBST.DFS_InOrder());//[ 2, 3, 4, 6, 7, 8, 10, 15, 20 ]

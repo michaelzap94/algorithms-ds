@@ -13,6 +13,23 @@ class MinBinaryHeap {
     constructor(){
         this.values = [];
     }
+    enqueueWithBubbleUpDep(val, priority){
+        let newNode = new Node(val, priority);
+        this.values.push(newNode);
+        this.bubbleUp();
+    }
+    bubbleUp(){
+        let idx = this.values.length - 1;
+        const element = this.values[idx];
+        while(idx > 0){
+            let parentIdx = Math.floor((idx - 1)/2);
+            let parent = this.values[parentIdx];
+            if(element.priority >= parent.priority) break;
+            this.values[parentIdx] = element;
+            this.values[idx] = parent;
+            idx = parentIdx;
+        }
+    }
     enqueue(value, priority){
         const newNode = new Node(value,priority);
         this.values.push(newNode);
@@ -69,8 +86,6 @@ class MinBinaryHeap {
 
 var newMaxBH = new MinBinaryHeap();
 newMaxBH.enqueue('ANY1',41);
-newMaxBH.enqueue('ANY2',39);
-newMaxBH.enqueue('ANY3',33);
 newMaxBH.enqueue('ANY4',18);
 newMaxBH.enqueue('ANY5',27);
 newMaxBH.enqueue('ANY6',12);
@@ -80,6 +95,4 @@ console.log(newMaxBH.values);
 // Node { val: 'ANY5', priority: 27 },
 // Node { val: 'ANY4', priority: 18 },
 // Node { val: 'ANY1', priority: 41 },
-// Node { val: 'ANY3', priority: 33 },
-// Node { val: 'ANY2', priority: 39 },
 // Node { val: 'ANY7', priority: 55 } ]

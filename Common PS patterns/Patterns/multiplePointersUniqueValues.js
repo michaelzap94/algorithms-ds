@@ -37,7 +37,7 @@ function countUniqueValues(arr){
         return 0;
     }
 
-    let i = 0;
+    let i = 0;//Using i as the dictionary, since it's sorted i will hold the latest unique value that j should look at.
     let j = 1;
     for (j; j < arr.length; j++) {       
         if(arr[i] !== arr[j]){

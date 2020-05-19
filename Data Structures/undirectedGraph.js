@@ -39,15 +39,6 @@ class Graph {
         delete this.adjacencyList[vertex];
     }
 
-    // DFS(vertex):
-    // if vertex is empty
-    //     return (this is base case)
-    // add vertex to results list
-    // mark vertex as visited
-    // for each neighbor in vertex's neighbors:
-    //    if neighbor is not visited:
-    //       recursively call DFS on neighbor
-    //===============================================================
     // Create a list to store the end result, to be returned at the very end
     // Create an object to store visited vertices
     // Create a helper function which accepts a vertex
@@ -83,17 +74,6 @@ class Graph {
         return returnedList;
     }
     
-    // DFS-iterative(start):
-    // let S be a stack
-    // S.push(start)
-    // while S is not empty
-    //     vertex = S.pop()
-    //     visit vertex (add to result list)
-    //     for each of vertex's neighbors, N do 
-    //          if vertex is not labeled as discovered:
-    //             S.push(N)
-    //             label vertex as discovered
-    //===========================================
     // Create a stack to help use keep track of vertices (use a list/array)
     // Create a list to store the end result, to be returned at the very end
     // Create an object to store visited vertices
@@ -112,8 +92,10 @@ class Graph {
         const seen = {[start]: true};
         let vertex;
         while(stack.length){
-            vertex  = stack.pop();
+            //put vertex into actualVisitedList
+            vertex  = stack.pop();//we pop the last item in the stack
             actualVisitedList.push(vertex);
+            //traverse through vertices and add them to the stack to be marked as visited next
             for (const neighbour of this.adjacencyList[vertex]) {
                 if(!seen[neighbour]){
                     seen[neighbour] = true;
@@ -163,7 +145,6 @@ class Graph {
 // console.log(mGraph.adjacencyList); //{ A: [ 'B', 'C' ], B: [ 'A' ], C: [ 'A' ] }
 // mGraph.removeVertex('B');
 // console.log(mGraph.adjacencyList); //{ A: [ 'C' ], C: [ 'A' ] }g.addVertex("A")
-
 var g = new Graph();
 g.addVertex("A")
 g.addVertex("B")

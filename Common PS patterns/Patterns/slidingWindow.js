@@ -51,7 +51,7 @@ function maxSubarraySum(arr, num){
     //There is no MAX
     let maxSum = 0;
     let previousSum = 0;
-    //First time: you HAVE TO SUM
+    //First time: you HAVE TO SUM, Create the first window
     for (let i = 0; i < num; i++) {
         maxSum += arr[i];
     }

@@ -11,7 +11,6 @@ class BST {
 
   insert(value) {
     // INSERT WHEN WE REACH TO A LEAF
-    // Do not edit the return statement of this method.
     let current = this;//this will be the root -> new BST(value)
     while(true){
         if(value < current.value){
