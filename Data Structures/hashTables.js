@@ -1,8 +1,11 @@
+//WORST CASE: O(n) -> in case all keys collide
+//Averate Case: O(1) -> in case keys rarely collide
 class HashTable {
     constructor(size = 53) {
         this.keyMap = new Array(size);
     }
     //Not the best, but will work for strings less than 100 chars long
+    //HASH functions out there are so efficient that there's almost no collisions
     _hash(key) {
         let total = 0;
         let WEIRD_PRIME = 31;
