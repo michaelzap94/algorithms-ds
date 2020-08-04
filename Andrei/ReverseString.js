@@ -15,6 +15,7 @@ function reverse1(str) {
         newStr =  str[i] + newStr;
     }
     return newStr;
+    
 }
 
 function reverse(str) {
