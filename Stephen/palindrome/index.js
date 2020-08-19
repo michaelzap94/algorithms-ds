@@ -7,9 +7,44 @@
 //   palindrome("abba") === true
 //   palindrome("abcdefg") === false
 
-function palindrome(str) {
+//easy just reverse the string
+function palindrome_reverse(str) {
     const reversed = str.split('').reverse().join('');
     return str === reversed;
 }
+
+//recursion:
+function palindrome_recursion(str){
+    //base case
+    if(str.length <= 1){return true;}
+    //execution
+    const first = str[0];
+    const last = str[str.length - 1];
+
+    if(first ===  last){
+        const new_str = str.slice(1, -1)
+        palindrome_recursion(new_str);
+    } 
+    return false;
+}
+
+//pointers:
+function palindrome(str){
+    //have 2 pointers that move towards the center
+    let tail = str.length - 1;
+
+    for (let head = 0; head < str.length; head++) {
+        if(str[head] === str[tail]){
+            if(head >= tail){
+                return true;
+            }
+            tail--;
+        } else {
+            return false;
+        }
+    }
+}
+
+
 
 module.exports = palindrome;
