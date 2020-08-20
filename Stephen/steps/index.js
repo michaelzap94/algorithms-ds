@@ -18,7 +18,7 @@
 //       '####'
 
 //n by n matrix -> 2 loops, print # if column in less or equal to row
-function steps(n){
+function steps_iterative(n){
     for (let row = 0; row < n; row++) {
         let str = '';
         for (let column = 0; column < n; column++) {
@@ -32,14 +32,24 @@ function steps(n){
     }
 }
 
-// function steps(n) {
-//     if(n === 1) {
-//         return;
-//     } else {
-//         n--;
-//         steps(n);
-//         console.log(n);
-//     }
-// }
+//n by n matrix -> 2 loops, print # if column in less or equal to row
+function steps(n, row = 0, stair = '') {
+    if(n === row) {
+        return;
+    }
+    //when the string 'stair' is full, equals to n, move to next string, increasing row
+    if(n === stair.length) {
+        console.log(stair);
+        steps(n, row + 1);
+        return;
+    }
+    //loop adding chars in the same row, same string
+    if(stair.length <= row){
+        stair += '#';
+    } else {
+        stair += ' ';
+    }
+    steps(n, row, stair);
+}
 
 module.exports = steps;
