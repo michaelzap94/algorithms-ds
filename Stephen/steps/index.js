@@ -17,6 +17,29 @@
 //       '### '
 //       '####'
 
-function steps(n) {}
+//n by n matrix -> 2 loops, print # if column in less or equal to row
+function steps(n){
+    for (let row = 0; row < n; row++) {
+        let str = '';
+        for (let column = 0; column < n; column++) {
+            if(column <= row){
+                str += '#';
+            } else {
+                str += ' ';
+            }
+        }
+        console.log(str);
+    }
+}
+
+// function steps(n) {
+//     if(n === 1) {
+//         return;
+//     } else {
+//         n--;
+//         steps(n);
+//         console.log(n);
+//     }
+// }
 
 module.exports = steps;
