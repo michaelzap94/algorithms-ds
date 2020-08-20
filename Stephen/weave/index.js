@@ -24,6 +24,34 @@
 
 const Queue = require('./queue');
 
-function weave(sourceOne, sourceTwo) {}
+//INPUTS: 2 Queues
+//OUTPUTS: 1 Queue with alternating content
+//Output derived from input: YES
+//Requirements: handle queues of different lengths without inserting 'undefined'
+//Assumptions: not null arguments, different lengths
+//Constraints: can only use add(), remove(), and peek() -> so no .length
+
+function weave(sourceOne, sourceTwo) {
+    const finalQueue = new Queue();
+    let oneRemoved = sourceOne.remove();
+    let twoRemoved = sourceTwo.remove();
+    while(oneRemoved || twoRemoved){
+        if(typeof oneRemoved !== undefined) finalQueue.add(oneRemoved); 
+        if(typeof twoRemoved !== undefined) finalQueue.add(twoRemoved);
+        oneRemoved = sourceOne.remove();
+        twoRemoved = sourceTwo.remove();
+    }
+    return finalQueue;
+}//takes a tiny bit of space with oneRemoved and twoRemoved, but reassigning so not a concern
+
+function weave(sourceOne, sourceTwo) {
+    const finalQueue = new Queue();
+    while(oneRemoved.peek() || twoRemoved.peek()){
+        if(oneRemoved.peek()) finalQueue.add(sourceOne.remove()); 
+        if(twoRemoved.peek()) finalQueue.add(sourceTwo.remove());
+    }
+    return finalQueue;
+    
+}//does not take space in memory
 
 module.exports = weave;

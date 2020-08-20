@@ -34,8 +34,8 @@ class Queue {
 // }
 // class Queue {
 //     constructor(){
-//         this.first = null;
-//         this.last = null;
+//         this.head = null;
+//         this.tail = null;
 //         this.length = 0;
 //     }
 
