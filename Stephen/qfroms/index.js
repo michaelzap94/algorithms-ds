@@ -14,6 +14,45 @@
 
 const Stack = require('./stack');
 
-class Queue {}
+
+//for this, we need 2 stacks, one has to be empty at all times, the other would hold the original content
+class Queue {
+    constructor(){
+        this.stack1 = new Stack();
+        this.stack2 = new Stack(); 
+    }
+
+    add(value){
+        this.stack1.push(value);
+    }
+
+    remove(){
+        //while there's something in stack1, move it to stack2 temporarily
+        while(this.stack1.peek()){
+            this.stack2.push(this.stack1.pop());
+        }
+        //after this: remove the last item:
+        const elementRemoved = this.stack2.pop();
+        //then RESTORE stack1 with the remaining elements
+        while(this.stack2.peek()){
+            this.stack1.push(this.stack2.pop());
+        }
+        return elementRemoved;
+    }
+
+    peek(){
+        //while there's something in stack1, move it to stack2 temporarily
+        while(this.stack1.peek()){
+            this.stack2.push(this.stack1.pop());
+        }
+        //after this: remove the last item:
+        const elementPeeked = this.stack2.peek();
+        //then RESTORE stack1 with the remaining elements
+        while(this.stack2.peek()){
+            this.stack1.push(this.stack2.pop());
+        }
+        return elementPeeked;
+    }
+}
 
 module.exports = Queue;
