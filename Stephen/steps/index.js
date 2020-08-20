@@ -44,6 +44,7 @@ function steps(n, row = 0, stair = '') {
         return;
     }
     //loop adding chars in the same row, same string
+    //stair.length is kind of like the column
     if(stair.length <= row){
         stair += '#';
     } else {
