@@ -8,6 +8,45 @@
 //     q.add(1);
 //     q.remove(); // returns 1;
 
-class Queue {}
+//you should use a LinkedList as removing from the beginning is O(n) for Arrays
+//using Arrays you shoul use, unshift and pop
+class Queue {
+    constructor(){
+        this.values = [];
+    }
+
+    //FIFO, so first in, first out, therefore add a
+    add(value){
+        this.values.unshift(value);
+    }
+
+    remove(){
+        return this.values.pop();
+    }
+}
+
+//USING linked list
+// class Node{
+//     constructor(value){
+//         this.value = value;
+//         this.next = null;
+//     }
+// }
+// class Queue {
+//     constructor(){
+//         this.first = null;
+//         this.last = null;
+//         this.length = 0;
+//     }
+
+//     //FIFO, so first in, first out, therefore add a
+//     add(value){
+
+//     }
+
+//     remove(){
+        
+//     }
+// }
 
 module.exports = Queue;
