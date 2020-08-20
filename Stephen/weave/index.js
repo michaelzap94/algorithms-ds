@@ -31,7 +31,7 @@ const Queue = require('./queue');
 //Assumptions: not null arguments, different lengths
 //Constraints: can only use add(), remove(), and peek() -> so no .length
 
-function weave(sourceOne, sourceTwo) {
+function weave_long(sourceOne, sourceTwo) {
     const finalQueue = new Queue();
     let oneRemoved = sourceOne.remove();
     let twoRemoved = sourceTwo.remove();
