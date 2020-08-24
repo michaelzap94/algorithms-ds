@@ -155,6 +155,19 @@ class LinkedList {
             }
         }
     }
+
+    forEach(callback){
+        let node = this.head;
+        let index = 0;
+        //iterate through the list
+        while(node){
+            //do something with node
+            callback(node, index);
+            //move to next node
+            node = node.next;
+            index++;
+        }
+    }
 }
 
 module.exports = { Node, LinkedList };
