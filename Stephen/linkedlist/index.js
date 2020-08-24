@@ -168,6 +168,17 @@ class LinkedList {
             index++;
         }
     }
+
+    *[Symbol.iterator](){
+        let node = this.head;
+        //iterate through the list
+        while(node){
+            //do something with node
+            yield node;
+            //move to next node
+            node = node.next;
+        }
+    }
 }
 
 module.exports = { Node, LinkedList };
