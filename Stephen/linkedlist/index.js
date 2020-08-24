@@ -15,7 +15,7 @@ class LinkedList {
     }
     insertFirst(data){
         const newNode = new Node(data);
-        newNode.next = this.head;
+        newNode.next = this.head;//this.head will be null if no head anyways
         this.head = newNode;
     }
 
@@ -103,15 +103,19 @@ class LinkedList {
     }
 
     removeAt(index){
-        const length = this.size();
+        //const length = this.size();
         //out of bounds
-        if(index < 0 || index >= length) {
-            return;
-        } else if(index === 0) {//remove head
+        // if(index < 0 || index >= length) {
+        //     return;
+        // } else if...
+        
+        if(index === 0) {//remove head
             this.removeFirst();
-        } else if(index === (length - 1)){//remove tail
-            this.removeLast();
-        } else {
+        } 
+        // ... else if(index === (length - 1)){//remove tail
+        //     this.removeLast();
+        // }  ...
+        else {
             //remove at index, use previous index
             const prev = this.getAt(index - 1);
             //if not node at index or it does not have a next property, return
@@ -121,6 +125,34 @@ class LinkedList {
             const nodeToDelete = prev.next;
             prev.next = nodeToDelete.next;
             //nodeToDelete.next = null;//optional, to remove references
+        }
+    }
+
+    insertAt(value, index){
+        //const length = this.size();
+        //out of bounds
+        // if(index < 0 || index >= length) {
+        //     return;
+        // } else if...
+        //out of bounds
+        if(index < 0) {
+            return;
+        } else if( index === 0) {
+            this.insertFirst(value);
+        } 
+        // ... else if(index === (length - 1)){//insert last
+        //     this.insertLast(value);
+        // }  ...
+        else {
+            const newNode = new Node(value);
+            const prev = this.getAt(index - 1);//||this.getLast();
+            //IF OUT OF BOUNDS on the UPPER SIDE, INSERT LAST;
+            if(!prev){
+                this.insertLast(value);
+            } else {
+                newNode.next = prev.next;
+                prev.next = newNode;
+            }
         }
     }
 }
