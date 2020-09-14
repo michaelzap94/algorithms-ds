@@ -36,7 +36,7 @@ console.log(findFactorialIterative(5));
 // the pattern of the sequence is that each value is the sum of the 2 previous values, that means that for N=5 → 2+3
 //For example: fibonacciRecursive(6) should return 8
 
-function fibonacciIterative(n) {
+function fibonacciIterative(n) { //O(n)
     //Start at the base: 0 AND THEN work it up to the complex operation.
     //first prefill the array with the base results, then start at the next index 2
     let arr = [0,1];
@@ -48,7 +48,7 @@ function fibonacciIterative(n) {
 }
 console.log(fibonacciIterative(8));
 
-function fibonacciRecursive(n) {
+function fibonacciRecursive(n) { //O(2^n)
   //base case:
   if(n < 2) return n;//if n is 0 -> 1, if 1 -> 1, otherwise do some calculations
   return fibonacciRecursive(n-1) + fibonacciRecursive(n-2);
