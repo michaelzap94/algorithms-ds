@@ -15,135 +15,112 @@ class Graph {
         if(!this.adjacencyList[from] || !this.adjacencyList[to]) return false;
         this.adjacencyList[from].push(to);
     }
-    // Reassign the key of vertex1 to be an array that does not contain vertex2
-    // Reassign the key of vertex2 to be an array that does not contain vertex1
-    // Don't worry about handling errors/invalid vertices FOR THIS VERSION
-    removeEdge(v1,v2){
-        if(!this.adjacencyList[v1] || !this.adjacencyList[v2]) return false;
-        const indexOfV1inV2 = this.adjacencyList[v1].indexOf(v2);
-        const indexOfV2inV1 = this.adjacencyList[v2].indexOf(v1);
-        if (indexOfV1inV2 !== -1) this.adjacencyList[v1].splice(indexOfV1inV2, 1);
-        if (indexOfV2inV1 !== -1) this.adjacencyList[v2].splice(indexOfV2inV1, 1);
-        // ALTERNATIVE: 
-        // this.adjacencyList[v1] = this.adjacencyList[v1].filter( v => v !== v2 );
-        // this.adjacencyList[v2] = this.adjacencyList[v2].filter( v => v !== v1 );
-    }
-    // The function should loop as long as there are any other vertices in the adjacency list for that vertex
-    // In the loop: use removeEdge(vertex we are removing, any values in the adjacency list for that vertex)
-    // Delete the key in the adjacency list for that vertex
-    removeVertex(vertex){
-        for (let i = 0; i < this.adjacencyList[vertex].length; i++) {
-            this.removeEdge(vertex, this.adjacencyList[vertex][i]);           
+
+    dfs() {
+        const seen = {};
+        let visited = [];
+        //iterate trough all the vertices
+        for (let vertex in this.adjacencyList) {
+            this._dfsUtil(vertex, seen, visited);
         }
-        delete this.adjacencyList[vertex];
+        return visited;
     }
 
-    // Create a list to store the end result, to be returned at the very end
-    // Create an object to store visited vertices
-    // Create a helper function which accepts a vertex
-    // The helper function should return early if the vertex is empty
-    // The helper function should place the vertex it accepts into the visited object and push that vertex into the result array.
-    // Loop over all of the values in the adjacencyList for that vertex
-    //  If any of those values have not been visited, recursively invoke the helper function with that vertex
-    // Invoke the helper function with the starting vertex
-    // Return the result array
-    dfs(vertex){
+    _dfsUtil(vertex, seen, visited) {
+        //if we have not processed it yet //process it
+        if(!seen[vertex]){
+            //we have seen it now
+            seen[vertex] = true;
+            //push to visited
+            visited.push(vertex);
+            for (let neighbour of this.adjacencyList[vertex]) {
+                //now process its children
+                this._dfsUtil(neighbour, seen, visited);
+            }
+        }
+    }
+
+    dfs_own(vertex){
         const returnedList = [];
         const visited = {};//{nodeA:true}
         const adjacencyList = this.adjacencyList;
         function helper(vertex){
             if(!vertex){
-                return null;
+                return;
             } else {
                 visited[vertex] = true;
                 returnedList.push(vertex);
-                // for (let i = 0; i < adjacencyList[vertex].length; i++) {
-                //     if(!visited[adjacencyList[vertex][i]]){
-                //         helper(adjacencyList[vertex][i]);
-                //     }                      
-                // } ///OR:( NOTICE THE return keyword in FOR loops will stop execution of remaining neighbors)
-                adjacencyList[vertex].forEach(neighbor => {
-                    if(!visited[neighbor]){
-                        return helper(neighbor);
-                    }  
-                });
+                for (let neighbour of adjacencyList[vertex]) {
+                    if(!visited[neighbour]){
+                        helper(neighbour);
+                    }                      
+                }
             }
         };
         helper(vertex);
         return returnedList;
     }
-    
-    // Create a stack to help use keep track of vertices (use a list/array)
-    // Create a list to store the end result, to be returned at the very end
-    // Create an object to store visited vertices
-    // Add the starting vertex to the stack, and mark it visited
-    // While the stack has something in it:
-    // Pop the next vertex from the stack
-    // Add it to the result list
-    // LOOP trough the element POPPED's neighbours
-    // If that vertex hasn't been visited yet:
-    // ​    Mark it as visited
-    //     Push it to the stack
-    // Return the result arrays
-    dfs_iter(start){
-        const stack = [start];
-        const actualVisitedList = [];
-        const seen = {[start]: true};
-        let vertex;
-        while(stack.length){
-            //put vertex into actualVisitedList
-            vertex  = stack.pop();//we pop the last item in the stack
-            actualVisitedList.push(vertex);
-            //traverse through vertices and add them to the stack to be marked as visited next
-            for (const neighbour of this.adjacencyList[vertex]) {
-                if(!seen[neighbour]){
-                    seen[neighbour] = true;
-                    stack.push(neighbour);
-                }
-            }
-        }
-        return actualVisitedList;
-    }
 
-    // Create a queue (you can use an array) and place the starting vertex in it
-    // Create an array to store the nodes visited
-    // Create an object to store nodes visited
-    // Mark the starting vertex as visited
-    // Loop as long as there is anything in the queue
-    //  Remove the first vertex from the queue and push it into the array that stores nodes visited
-    //  Loop over each vertex in the adjacency list for the vertex you are visiting.
-    //      If it is not inside the object that stores nodes visited, mark it as visited and enqueue that vertex
-    // Once you have finished looping, return the array of visited nodes
-    bfs(start){
-        const queue = [start];
-        const actualVisitedList = [];
-        const seen = {[start]:true};
-        let vertex;
-        while(queue.length){
-            vertex = queue.shift();
-            actualVisitedList.push(vertex);
-            for (const neighbor of this.adjacencyList[vertex]) {
-                if(!seen[neighbor]){
-                    seen[neighbor] = true;
-                    queue.push(neighbor);
-                }
+    // Returns true if the graph contains a  
+    // cycle, else false. 
+    // This function is a variation of DFS() in  
+    isCyclic() { 
+        // Mark all the vertices as not visited and not part of recursion stack 
+        let visited = {}; 
+        // recStack stands for ‘recursion stack’, and it’s what’s keeping track of the back edges, 
+        // the vertices we visited to get us to our current vertex.
+        let recStack = {};
+        // Call the recursive helper function to detect cycle in different DFS trees 
+        for (let node in this.adjacencyList) {
+            //if a cycle, return true, else keep processing the rest of the vertices
+            if (this.isCyclicUtil(node, visited, recStack)) {
+                return true; 
             }
         }
-        return actualVisitedList;
-    }
+        //if no cycle, then return false
+        return false; 
+    } 
+
+    isCyclicUtil(node, visited, recStack) { 
+        // we’re checking to see if a particular edge is in our recStack, which would mean that we’ve already visited it. 
+        if (recStack[node]) 
+            return true; 
+        // if we have visited already, no need to visit again.
+        if (visited[node]) 
+            return false; 
+
+        // Mark the current node as visited and part of recursion stack 
+        visited[node] = true; 
+        recStack[node] = true; 
+
+        // This time we’re not just checking to see if we’ve visited them or not — 
+        // we’re checking to see if a particular edge is in our recStack, which would mean that we’ve already visited it. 
+        // That’s our indicator that we’ve found a cycle.
+        for (let neighbour of this.adjacencyList[node]) {
+            if (this.isCyclicUtil(neighbour, visited, recStack)) {
+                return true; 
+            }
+        }
+        // If the vertex isn’t in our recStack, than we pop it off the recursion stack 
+        // so we won’t get a false positive as we traverse another path through the graph.
+        recStack[node] = false; 
+        return false; 
+    } 
+
+    showConnections() { 
+        const allNodes = Object.keys(this.adjacencyList); 
+        for (let node of allNodes) { 
+          let nodeConnections = this.adjacencyList[node]; 
+          let connections = ""; 
+          let vertex;
+          for (vertex of nodeConnections) {
+            connections += vertex + " ";
+          } 
+          console.log(node + "-->" + connections); 
+        } 
+    } 
 }
-// var mGraph = new Graph();
-// mGraph.addVertex('A');
-// mGraph.addVertex('B');
-// mGraph.addVertex('C');
-// mGraph.addEdge('A','B');
-// mGraph.addEdge('A','C');
-// mGraph.addEdge('B','C');
-// console.log(mGraph.adjacencyList); //{ A: [ 'B', 'C' ], B: [ 'A', 'C' ], C: [ 'A', 'B' ] }
-// mGraph.removeEdge('B','C');
-// console.log(mGraph.adjacencyList); //{ A: [ 'B', 'C' ], B: [ 'A' ], C: [ 'A' ] }
-// mGraph.removeVertex('B');
-// console.log(mGraph.adjacencyList); //{ A: [ 'C' ], C: [ 'A' ] }g.addVertex("A")
+
 var g = new Graph();
 g.addVertex("A")
 g.addVertex("B")
@@ -158,6 +135,8 @@ g.addEdge("C","E")
 g.addEdge("D","E")
 g.addEdge("D","F")
 g.addEdge("E","F")
-console.log(g.dfs("A"));//[ 'A', 'B', 'D', 'E', 'C', 'F' ]
-console.log(g.dfs_iter("A"));//[ 'A', 'C', 'E', 'F', 'D', 'B' ]
-console.log(g.bfs("A"));//[ 'A', 'B', 'C', 'D', 'E', 'F' ]
+// g.addEdge("F","D")
+console.log(g.showConnections);
+console.log(g.dfs())
+console.log(g.isCyclic())
+console.log(g.dfs_own("A"));

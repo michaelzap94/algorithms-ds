@@ -23,6 +23,7 @@ class Graph {
             this.adjacentList[node2].push(node1);
         }
     } 
+
     showConnections() { 
       const allNodes = Object.keys(this.adjacentList); 
       for (let node of allNodes) { 

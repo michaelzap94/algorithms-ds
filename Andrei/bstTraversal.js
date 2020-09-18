@@ -147,7 +147,25 @@ class BinarySearchTree {
     return list;
   }
 
-  bfs_recursive(queue, list) {
+  bfs_own() {
+    const queue = [this.root];
+    const list = [];
+    
+    while (queue.length) {
+      const currentNode = queue.shift();
+      list.push(currentNode.value);
+  
+      if (currentNode.left) {
+        queue.push(currentNode.left);
+      }
+      if (currentNode.right) {
+        queue.push(currentNode.right);
+      }
+    }
+    return list;
+  }
+
+  bfs_recursive(queue, list = []) {
     if (!queue.length) {
       return list;
     }
@@ -163,6 +181,40 @@ class BinarySearchTree {
 
     return this.bfs_recursive(queue, list);
   }
+
+  //height of the tree will match the deepest function -> O(depth of tree)
+  dfs_inorder() {
+    let visited = [];
+    function helper(node) {
+      if(node.left) helper(node.left);
+      visited.push(node.value);
+      if(node.right) helper(node.right);
+    }
+    helper(this.root);
+    return visited;
+  }
+
+  dfs_preorder() {
+    let visited = [];
+    function helper(node) {
+      visited.push(node.value);
+      if(node.left) helper(node.left);
+      if(node.right) helper(node.right);
+    }
+    helper(this.root);
+    return visited;
+  }
+
+  dfs_postorder() {
+    let visited = [];
+    function helper(node) {
+      if(node.left) helper(node.left);
+      if(node.right) helper(node.right);
+      visited.push(node.value);
+    }
+    helper(this.root);
+    return visited;
+  }
 }
 
 const tree = new BinarySearchTree();
@@ -177,7 +229,12 @@ tree.remove(170);
 JSON.stringify(traverse(tree.root));
 
 console.log('BFS', tree.bfs());
-console.log('BFS', tree.bfs_recursive([tree.root], []))
+console.log('BFS', tree.bfs_recursive([tree.root]))
+console.log('BFS', tree.bfs_recursive_own())
+console.log('inorder', tree.dfs_inorder())
+console.log('preorder', tree.dfs_preorder())
+console.log('postorder', tree.dfs_postorder())
+
 //     9
 //  4     20
 //1  6  15  170
