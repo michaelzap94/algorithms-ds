@@ -1,3 +1,6 @@
+#https://www.algoexpert.io/questions/Powerset
+# time: n * 2 ^ n, we double every time(n^2) we iterate through the first loop(n)
+# space: n * 2 ^ n, same as time
 def powerset(array):
     result = [[]]
     for element in array:
