@@ -10,8 +10,8 @@ function threeNumberSum(array, targetSum) {
 	//first sort it
     array.sort((a,b) => a - b);
 	const triplets = [];
-	//we want t looop till array.length - 2, because by the time we get to this value, 
-	//array.length - 1 will have been processed by all the remaining numbers;
+	//we want t looop till array.length - 3, because by the time we get to this value, 
+	//array.length - 1 and array.length - 2 will have been processed by all the remaining numbers;
 	for(let i = 0; i < array.length - 2;i++) {
 
         // skip the repetition of the same element (the limitation of problem description)------------
